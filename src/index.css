@@ -1,0 +1,13 @@
+.carousel {
+  width: 300px !important;
+  height: 200px !important;
+}
+
+.carousel .handle {
+  background-color: white;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  cursor: pointer;
+}

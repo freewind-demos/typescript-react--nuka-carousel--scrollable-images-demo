@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const express = require('express');
 const path = require('path');
 
 module.exports = {
@@ -13,13 +14,28 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js']
   },
   module: {
-    rules: [{
-      test: /\.tsx?$/,
-      loader: 'ts-loader',
-      exclude: /node_modules/
-    }]
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          {loader: 'style-loader'},
+          {loader: 'css-loader'}
+        ]
+      },
+      {
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/
+      }]
   },
   plugins: [
     new HtmlWebpackPlugin()
-  ]
+  ],
+  devServer: {
+    contentBase: './images/', // TODO: 没搞清楚具体作用
+    watchContentBase: true,
+    before(app) {
+      app.use('/images', express.static('./images/'));
+    }
+  }
 }
