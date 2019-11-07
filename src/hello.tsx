@@ -6,8 +6,18 @@ export default function Hello() {
     <h1>Hello nuka-carousel</h1>
     <Carousel
       className='carousel'
-      renderCenterLeftControls={({previousSlide}) => <a className='handle' onClick={previousSlide}>&lt;</a>}
-      renderCenterRightControls={({nextSlide}) => <a className='handle' onClick={nextSlide}>&gt;</a>}
+      renderCenterLeftControls={(control) => {
+        if (control.currentSlide === 0) {
+          return null;
+        }
+        return <a className='handle' onClick={control.previousSlide}>&lt;</a>
+      }}
+      renderCenterRightControls={(control) => {
+        if (control.currentSlide === control.slideCount - 1) {
+          return null;
+        }
+        return <a className='handle' onClick={control.nextSlide}>&gt;</a>
+      }}
     >
       <img src='/images/cat1.jpeg'/>
       <img src='/images/cat2.jpeg'/>
